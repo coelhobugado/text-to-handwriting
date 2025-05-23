@@ -49,7 +49,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 30) {
-        alert('Font-size is too big try upto 30');
+        alert('O tamanho da fonte é muito grande, tente até 30');
       } else {
         setTextareaStyle('fontSize', e.target.value + 'pt');
         e.preventDefault();
@@ -60,7 +60,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 40) {
-        alert('Letter Spacing is too big try a number upto 40');
+        alert('O espaçamento entre letras é muito grande, tente um número até 40');
       } else {
         setTextareaStyle('letterSpacing', e.target.value + 'px');
         e.preventDefault();
@@ -71,7 +71,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 100) {
-        alert('Word Spacing is too big try a number upto hundred');
+        alert('O espaçamento entre palavras é muito grande, tente um número até cem');
       } else {
         setTextareaStyle('wordSpacing', e.target.value + 'px');
         e.preventDefault();
@@ -167,13 +167,13 @@ document.querySelectorAll('.switch-toggle input').forEach((toggleInput) => {
     if (toggleInput.checked) {
       document.querySelector(
         `label[for="${toggleInput.id}"] .status`
-      ).textContent = 'on';
+      ).textContent = 'ligado';
       toggleInput.setAttribute('aria-checked', true);
     } else {
       toggleInput.setAttribute('aria-checked', false);
       document.querySelector(
         `label[for="${toggleInput.id}"] .status`
-      ).textContent = 'off';
+      ).textContent = 'desligado';
     }
   });
 });
