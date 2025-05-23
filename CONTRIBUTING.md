@@ -1,27 +1,27 @@
-# Contribution Guide 🌻
+# Guia de Contribuição 🌻
 
-The project is built with basic web setup (HTML, CSS, and JavaScript).
+O projeto é construído com uma configuração web básica (HTML, CSS e JavaScript).
 
-## 🐨 Local Setup
+## 🐨 Configuração Local
 
-- [Fork](https://github.com/saurabhdaware/text-to-handwriting/fork) this repository.
+- Faça um [Fork](https://github.com/saurabhdaware/text-to-handwriting/fork) deste repositório. <!-- TODO: Atualizar este link para apontar para o fork atual, se necessário. -->
 
-*Note: You need NodeJS installed in your machine to run formatter and server*
+*Observação: Você precisa do NodeJS instalado em sua máquina para rodar o formatador e o servidor*
 
 ```
-git clone https://github.com/:your-github-username/text-to-handwriting
+git clone https://github.com/:seu-nome-de-usuario-do-github/text-to-handwriting
 cd text-to-handwriting
 npm install
 npm run dev
 ```
 
-## 🤗 Hello First-time Contributors
+## 🤗 Olá Contribuidores de Primeira Viagem
 
-There are lot of resources (articles, courses, videos) available for getting started with git and GitHub you can search and follow any of the resource you like.
+Existem muitos recursos (artigos, cursos, vídeos) disponíveis para começar com git e GitHub; você pode pesquisar e seguir qualquer recurso que desejar.
 
-- You can pick any of the issues from [Issues](https://github.com/saurabhdaware/text-to-handwriting/issues) or If you feel like it needs extra feature or if you find bug, you can create your own issue.
-- You can drop a comment on issue saying "Hi Saurabh, let me work on this or I will kill you 🔪" to avoid multiple people working on the same PR.
+- Você pode escolher qualquer uma das issues em [Issues](https://github.com/saurabhdaware/text-to-handwriting/issues) <!-- TODO: Atualizar este link para apontar para as issues do fork atual, se necessário. --> ou, se sentir que precisa de um recurso extra ou se encontrar um bug, pode criar sua própria issue.
+- Você pode deixar um comentário na issue dizendo "Olá [mantenedor], deixe-me trabalhar nisso ou vou transformar seu café em descafeinado 🔪" para evitar que várias pessoas trabalhem na mesma PR.
 
-Lastly, It is fine if you mess something up. If there is anything wrong in the PR I will let you know how to fix that in comments of the PR.
+Por último, não há problema se você bagunçar algo. Se houver algo errado na PR, eu informarei como consertar nos comentários da PR.
 
-If you are still scared to drop a PR or need any help, you can always drop me a message on my [Twitter @saurabhcodes](https://twitter.com/saurabhcodes) or drop me an email at saurabhdaware99@gmail.com.
+Se você ainda estiver com receio de enviar uma PR ou precisar de ajuda, pode sempre me enviar uma mensagem no [Twitter do mantenedor] ou enviar um e-mail para [e-mail de contato do mantenedor]. <!-- TODO: Atualizar com os detalhes de contato do mantenedor atual. -->
