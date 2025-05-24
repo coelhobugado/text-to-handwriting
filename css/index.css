@@ -19,6 +19,13 @@ body {
   --font-color-delete: #dc3545;
   --delete-button-borders: #dc3545;
 
+  /* Novas variáveis de cor de papel */
+  --paper-color-white: #FFFFFF;
+  --paper-color-lightyellow: #fef9e7; /* Amarelo bem claro */
+  --paper-color-lightpink: #ffe4e9;  /* Rosa bem claro e suave */
+  --paper-color-lightblue: #e3f2fd;  /* Azul bem claro */
+  --current-paper-color: var(--paper-color-white); /* Define o branco como padrão inicial */
+
   width: 100%;
   overflow-x: hidden;
 }
@@ -206,7 +213,8 @@ body.dark .github-corner {
 .page-a {
   width: 400px;
   height: calc(11.7 * 400px / 8.3); /* A4 Ratio */
-  background: #fff;
+  /* background: #fff; Alterado para background-color abaixo */
+  background-color: var(--current-paper-color); /* Aplicando a variável de cor do papel */
   border: 1px solid var(--elevation-background);
   font-size: 10pt;
   position: relative;
@@ -240,7 +248,7 @@ body.dark .github-corner {
 }
 .page-a.lines .paper-content {
   background-image: linear-gradient(#999 0.05em, transparent 0.1em);
-  background-color: unset !important;
+  background-color: unset; /* !important removido */
   background-size: 100% 1.5em;
 }
 

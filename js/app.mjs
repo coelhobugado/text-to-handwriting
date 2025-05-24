@@ -96,6 +96,27 @@ const EVENT_MAP = {
       setInkColor(e.target.value);
     }
   },
+  '#paper-color': {
+    on: 'change',
+    action: (e) => {
+      const selectedValue = e.target.value;
+      let paperColorVar = 'var(--paper-color-white)'; // Padrão (branco)
+
+      switch (selectedValue) {
+        case 'lightyellow':
+          paperColorVar = 'var(--paper-color-lightyellow)';
+          break;
+        case 'lightpink':
+          paperColorVar = 'var(--paper-color-lightpink)';
+          break;
+        case 'lightblue':
+          paperColorVar = 'var(--paper-color-lightblue)';
+          break;
+        // O caso 'white' já está coberto pelo valor padrão de paperColorVar
+      }
+      document.body.style.setProperty('--current-paper-color', paperColorVar);
+    }
+  },
   '#paper-margin-toggle': {
     on: 'change',
     action: () => {
