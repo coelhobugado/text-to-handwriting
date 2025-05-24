@@ -49,7 +49,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 30) {
-        alert('O tamanho da fonte é muito grande, tente até 30');
+        console.warn('O tamanho da fonte é muito grande, tente até 30'); // TODO: Substituir por uma notificação de UI não bloqueante (ex: showNotification("Mensagem...", "warning"))
       } else {
         setTextareaStyle('fontSize', e.target.value + 'pt');
         e.preventDefault();
@@ -60,7 +60,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 40) {
-        alert('O espaçamento entre letras é muito grande, tente um número até 40');
+        console.warn('O espaçamento entre letras é muito grande, tente um número até 40'); // TODO: Substituir por uma notificação de UI não bloqueante (ex: showNotification("Mensagem...", "warning"))
       } else {
         setTextareaStyle('letterSpacing', e.target.value + 'px');
         e.preventDefault();
@@ -71,7 +71,7 @@ const EVENT_MAP = {
     on: 'change',
     action: (e) => {
       if (e.target.value > 100) {
-        alert('O espaçamento entre palavras é muito grande, tente um número até cem');
+        console.warn('O espaçamento entre palavras é muito grande, tente um número até cem'); // TODO: Substituir por uma notificação de UI não bloqueante (ex: showNotification("Mensagem...", "warning"))
       } else {
         setTextareaStyle('wordSpacing', e.target.value + 'px');
         e.preventDefault();
@@ -94,6 +94,27 @@ const EVENT_MAP = {
     action: (e) => {
       document.body.style.setProperty('--ink-color', e.target.value);
       setInkColor(e.target.value);
+    }
+  },
+  '#paper-color': {
+    on: 'change',
+    action: (e) => {
+      const selectedValue = e.target.value;
+      let paperColorVar = 'var(--paper-color-white)'; // Padrão (branco)
+
+      switch (selectedValue) {
+        case 'lightyellow':
+          paperColorVar = 'var(--paper-color-lightyellow)';
+          break;
+        case 'lightpink':
+          paperColorVar = 'var(--paper-color-lightpink)';
+          break;
+        case 'lightblue':
+          paperColorVar = 'var(--paper-color-lightblue)';
+          break;
+        // O caso 'white' já está coberto pelo valor padrão de paperColorVar
+      }
+      document.body.style.setProperty('--current-paper-color', paperColorVar);
     }
   },
   '#paper-margin-toggle': {
@@ -185,10 +206,17 @@ document.querySelectorAll('.switch-toggle input').forEach((toggleInput) => {
 fetch(
   'https://api.github.com/repos/saurabhdaware/text-to-handwriting/contributors'
 )
-  .then((res) => res.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Erro HTTP ao buscar contribuidores: ${response.status}`);
+    }
+    return response.json();
+  })
   .then((res) => {
-    document.querySelector('#project-contributors').innerHTML = res
-      .map(
+    const contributorsSection = document.querySelector('#project-contributors');
+    if (contributorsSection) {
+      contributorsSection.innerHTML = res
+        .map(
         (contributor) => /* html */ `
         <div class="contributor-profile shadow">
           <a href="${contributor.html_url}">
@@ -204,4 +232,13 @@ fetch(
       `
       )
       .join('');
+    }
+  })
+  .catch(error => {
+    console.error('Erro ao buscar contribuidores do GitHub:', error);
+    // console.warn('Não foi possível carregar a lista de contribuidores do GitHub.'); // Opcional
+    const contributorsSection = document.querySelector('#project-contributors');
+    if (contributorsSection) {
+      contributorsSection.innerHTML = '<p>Não foi possível carregar os contribuidores.</p>';
+    }
   });
