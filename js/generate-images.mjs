@@ -5,7 +5,16 @@ import {
 } from './utils/generate-utils.mjs';
 import { createPDF } from './utils/helpers.mjs';
 
+// Altura base (em pixels) do elemento .page-a .paper-content quando está vazio
+// e após applyPaperStyles() ter sido chamado (considerando paddings, etc., que afetam a área útil).
+// Este valor é crucial para o cálculo de paginação.
+// Se os estilos CSS de .page-a, .paper-content, ou .top-margin mudarem significativamente,
+// este valor PODE precisar ser reavaliado inspecionando a altura do elemento no navegador
+// em um estado "vazio" de conteúdo, mas com as margens e linhas da página visíveis.
+const BASE_PAGE_CONTENT_HEIGHT_PX = 514;
+
 const pageEl = document.querySelector('.page-a');
+const outputContainer = document.querySelector('#output');
 let outputImages = [];
 
 /**
@@ -21,7 +30,15 @@ async function convertDIVToImage() {
   };
 
   /** Function html2canvas comes from a library html2canvas which is included in the index.html */
-  const canvas = await html2canvas(pageEl, options);
+  const canvas = await html2canvas(pageEl, options).catch(error => {
+    console.error('Erro durante a geração da imagem por html2canvas:', error);
+    console.warn('Falha ao gerar imagem. Verifique o console para detalhes.'); // TODO: Substituir por uma notificação de UI não bloqueante
+    // Se houvesse um indicador de "carregando" global, ele seria desativado aqui.
+    throw error; // Sinaliza a falha para generateImages
+  });
+
+  // Se o canvas não foi gerado devido a um erro, não prossiga.
+  if (!canvas) return;
 
   /** Send image data for modification if effect is scanner */
   if (document.querySelector('#page-effects').value === 'scanner') {
@@ -43,12 +60,24 @@ async function convertDIVToImage() {
  * This is the function that gets called on clicking "Generate Image" button.
  */
 export async function generateImages() {
+  let hyphenatorPtBr = null; // Inicializa como null
+  if (typeof Hypher !== 'undefined' && typeof HypherPatternsPtBr !== 'undefined') {
+    try {
+      hyphenatorPtBr = new Hypher(HypherPatternsPtBr);
+    } catch (e) {
+      console.error("Erro ao inicializar Hypher com padrões pt-BR:", e);
+      // hyphenatorPtBr permanecerá null se houver erro
+    }
+  } else {
+    console.warn('Hypher ou padrões pt-BR (HypherPatternsPtBr) não foram carregados. A hifenização estará desativada.');
+  }
+
   applyPaperStyles();
   pageEl.scroll(0, 0);
 
   const paperContentEl = document.querySelector('.page-a .paper-content');
   const scrollHeight = paperContentEl.scrollHeight;
-  const clientHeight = 514; // height of .paper-content when there is no content
+  const clientHeight = BASE_PAGE_CONTENT_HEIGHT_PX; // height of .paper-content when there is no content
 
   const totalPages = Math.ceil(scrollHeight / clientHeight);
 
@@ -80,18 +109,47 @@ export async function generateImages() {
       }
       paperContentEl.innerHTML = wordString;
       wordCount--;
+
+      let finalTextToRender = wordString;
+      if (hyphenatorPtBr && typeof hyphenatorPtBr.hyphenateText === 'function') {
+        try {
+          // Importante: Hypher espera texto puro. Se wordString contiver HTML,
+          // esta hifenização pode não ser ideal ou pode quebrar o HTML.
+          // Para uma melhor abordagem, seria necessário extrair nós de texto,
+          // hifenizá-los e reconstruir. Mas para esta tarefa, vamos tentar
+          // hifenizar a string diretamente, assumindo que é majoritariamente texto
+          // ou HTML simples que o Hypher pode não quebrar (ele busca palavras).
+          finalTextToRender = hyphenatorPtBr.hyphenateText(wordString);
+        } catch (e) {
+          console.error("Erro ao aplicar hifenização:", e);
+          // Em caso de erro, usa o texto original não hifenizado
+          finalTextToRender = wordString;
+        }
+      }
+      paperContentEl.innerHTML = finalTextToRender; // Define o conteúdo com hifenização (ou original se falhar)
+
       pageEl.scrollTo(0, 0);
       await convertDIVToImage();
-      paperContentEl.innerHTML = initialPaperContent;
+      paperContentEl.innerHTML = initialPaperContent; // Restaura para o conteúdo original para a próxima iteração
     }
   } else {
     // single image
+    let singlePageContent = paperContentEl.innerHTML;
+    if (hyphenatorPtBr && typeof hyphenatorPtBr.hyphenateText === 'function') {
+      try {
+        singlePageContent = hyphenatorPtBr.hyphenateText(singlePageContent);
+      } catch (e) {
+        console.error("Erro ao aplicar hifenização (página única):", e);
+      }
+    }
+    paperContentEl.innerHTML = singlePageContent;
+
     await convertDIVToImage();
   }
 
   removePaperStyles();
   renderOutput(outputImages);
-  setRemoveImageListeners();
+  // setRemoveImageListeners(); // Call removed, event delegation will handle this
 }
 
 /**
@@ -117,63 +175,21 @@ const arrayMove = (arr, oldIndex, newIndex) => {
 };
 
 export const moveLeft = (index) => {
-  if (index === 0) return outputImages;
-  outputImages = arrayMove(outputImages, index, index - 1);
-  renderOutput(outputImages);
+  if (index === 0) return;
+  arrayMove(outputImages, index, index - 1);
+  // renderOutput(outputImages); // Called by the event listener
 };
 
 export const moveRight = (index) => {
-  if (index + 1 === outputImages.length) return outputImages;
-  outputImages = arrayMove(outputImages, index, index + 1);
-  renderOutput(outputImages);
+  if (index + 1 === outputImages.length) return;
+  arrayMove(outputImages, index, index + 1);
+  // renderOutput(outputImages); // Called by the event listener
 };
 
 /**
  * Downloads generated images as PDF
  */
 export const downloadAsPDF = () => createPDF(outputImages);
-
-/**
- * Sets event listeners for close button on output images.
- */
-function setRemoveImageListeners() {
-  document
-    .querySelectorAll('.output-image-container > .close-button')
-    .forEach((closeButton) => {
-      closeButton.addEventListener('click', (e) => {
-        outputImages.splice(Number(e.target.dataset.index), 1);
-        // Displaying no. of images on deletion
-        if (outputImages.length >= 0) {
-          document.querySelector('#output-header').textContent =
-            'Output' +
-            (outputImages.length ? ' ( ' + outputImages.length + ' )' : '');
-        }
-        renderOutput(outputImages);
-        // When output changes, we have to set remove listeners again
-        setRemoveImageListeners();
-      });
-    });
-
-  document.querySelectorAll('.move-left').forEach((leftButton) => {
-    leftButton.addEventListener('click', (e) => {
-      moveLeft(Number(e.target.dataset.index));
-      // Displaying no. of images on deletion
-      renderOutput(outputImages);
-      // When output changes, we have to set remove listeners again
-      setRemoveImageListeners();
-    });
-  });
-
-  document.querySelectorAll('.move-right').forEach((rightButton) => {
-    rightButton.addEventListener('click', (e) => {
-      moveRight(Number(e.target.dataset.index));
-      // Displaying no. of images on deletion
-      renderOutput(outputImages);
-      // When output changes, we have to set remove listeners again
-      setRemoveImageListeners();
-    });
-  });
-}
 
 /** Modifies image data to add contrast */
 
@@ -187,4 +203,26 @@ function contrastImage(imageData, contrast) {
     data[i + 2] = factor * (data[i + 2] - 128) + 128;
   }
   return imageData;
+}
+
+// Event Delegation for output image controls
+if (outputContainer) {
+  outputContainer.addEventListener('click', (e) => {
+    const target = e.target;
+    const index = Number(target.dataset.index);
+
+    if (target.matches('.output-image-container > .close-button')) {
+      outputImages.splice(index, 1);
+      document.querySelector('#output-header').textContent =
+        'Output' +
+        (outputImages.length ? ' ( ' + outputImages.length + ' )' : '');
+      renderOutput(outputImages);
+    } else if (target.matches('.move-left')) {
+      moveLeft(index);
+      renderOutput(outputImages);
+    } else if (target.matches('.move-right')) {
+      moveRight(index);
+      renderOutput(outputImages);
+    }
+  });
 }
