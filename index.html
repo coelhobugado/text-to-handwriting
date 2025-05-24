@@ -88,13 +88,10 @@
     <link rel="manifest" href="./manifest.webmanifest" />
 
     <!-- Load Fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Homemade+Apple|Roboto|Caveat|Liu+Jian+Mao+Cao&display=swap"
-    />
+    <!-- As tags de fonte antigas foram removidas e substituídas pela tag consolidada abaixo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Indie+Flower&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script:wght@400..700&family=Homemade+Apple&family=Indie+Flower&family=Liu+Jian+Mao+Cao&family=Patrick+Hand&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="./css/index.css" />
@@ -234,13 +231,13 @@
                   </div>
                   <div class="upload-handwriting-container">
                     <label class="block" for="font-file"
-                      >Envie sua fonte de caligrafia <small>(Beta)</small>&nbsp;
+                      >Envie sua fonte de caligrafia <small>(Beta)</small> 
                       <a
                         style="font-size: 1.1rem;"
                         title="Como adicionar sua própria caligrafia"
                         href="#how-to-add-handwriting"
                       >
-                        &#9432;
+                        ⓘ
                       </a>
                     </label>
                     <input accept=".ttf, .otf" type="file" id="font-file" />
@@ -274,7 +271,7 @@
                   <div>
                     <label class="block" for="page-size">Tamanho da Página</label>
                     <select id="page-size">
-                      <option default value="a4">A4 &nbsp;</option>
+                      <option default value="a4">A4  </option>
                     </select>
                   </div>
                   <div>
@@ -465,7 +462,7 @@
               src="https://c5.patreon.com/external/logo/become_a_patron_button.png"
             />
           </a>
-          &nbsp;
+           
           <a href="https://www.buymeacoffee.com/saurabhdaware">
             <img
               loading="lazy"
@@ -538,7 +535,7 @@
 
     <!-- Fixed Elements -->
     <section class="draw-container popup-container">
-      <button class="close-button">&times;</button>
+      <button class="close-button">×</button>
       <div class="display-flex responsive-flex">
         <canvas
           id="diagram-canvas"

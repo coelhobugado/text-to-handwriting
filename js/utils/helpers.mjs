@@ -28,24 +28,27 @@ function addFontFromFile(fileObj) {
  */
 function createPDF(imgs) {
   // eslint-disable-next-line new-cap
+  // eslint-disable-next-line new-cap
   const doc = new jsPDF('p', 'pt', 'a4');
   const width = doc.internal.pageSize.width;
   const height = doc.internal.pageSize.height;
-  for (const i in imgs) {
-    doc.text(10, 20, '');
+
+  imgs.forEach((imgData, index) => {
+    doc.text(10, 20, ''); // Esta linha parece redundante ou para um propósito não claro, mas mantenha-a se estava lá.
     doc.addImage(
-      imgs[i],
+      imgData, // Alterado de imgs[i]
       'JPEG',
       25,
       50,
       width - 50,
       height - 80,
-      'image-' + i
+      'image-' + index // Alterado de 'image-' + i
     );
-    if (i != imgs.length - 1) {
+    if (index !== imgs.length - 1) { // Alterado de i != imgs.length - 1
       doc.addPage();
     }
-  }
+  });
+
   doc.save();
 }
 

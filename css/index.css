@@ -182,7 +182,7 @@ body.dark .github-corner {
   background-color: var(--elevation-background);
 }
 .customization-col {
-  padding: 0px 50px !important;
+  padding: 0px 50px; /* !important removido */
 }
 
 .left-margin-and-content {
@@ -219,6 +219,20 @@ body.dark .github-corner {
   overflow-y: auto;
   scrollbar-color: transparent;
   scrollbar-width: thin;
+}
+.page-a::-webkit-scrollbar {
+  width: 5px; /* Largura fina */
+  height: 5px; /* Altura fina para scroll horizontal, se aplicável */
+}
+.page-a::-webkit-scrollbar-track {
+  background: transparent; /* Sem fundo para o track */
+}
+.page-a::-webkit-scrollbar-thumb {
+  background: #ccc; /* Cor discreta para o thumb, similar ao efeito 'transparent' sobre branco */
+  border-radius: 3px; /* Bordas arredondadas */
+}
+.page-a::-webkit-scrollbar-thumb:hover {
+  background: #aaa; /* Cor um pouco mais escura no hover */
 }
 .paper-content {
   margin: 10px;
@@ -282,6 +296,23 @@ body.dark .github-corner {
   white-space: nowrap;
   overflow-x: auto;
   border: 1px solid var(--elevation-background);
+  /* Adicionando estilos de scrollbar para Firefox e WebKit */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent; /* Firefox: thumb e track */
+}
+.output::-webkit-scrollbar {
+  width: 5px;   /* Largura fina para WebKit */
+  height: 5px;  /* Altura fina para WebKit (para scroll horizontal) */
+}
+.output::-webkit-scrollbar-track {
+  background: transparent; /* Track transparente para WebKit */
+}
+.output::-webkit-scrollbar-thumb {
+  background: #ccc; /* Cor do thumb para WebKit */
+  border-radius: 3px; /* Bordas arredondadas para WebKit */
+}
+.output::-webkit-scrollbar-thumb:hover {
+  background: #aaa; /* Cor do thumb no hover para WebKit */
 }
 .output .close-button {
   position: absolute;
@@ -353,7 +384,7 @@ body.dark .github-corner {
     flex-direction: column;
   }
   .customization-col {
-    padding: 100px 5px !important;
+    padding: 100px 5px; /* !important removido */
   }
   .page-container {
     width: 100%;
@@ -375,6 +406,25 @@ body.dark .github-corner {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+  }
+  /* Adicionando estilos de scrollbar para .project-contributors aqui */
+  .project-contributors {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #ccc transparent; /* Firefox: thumb e track */
+  }
+  .project-contributors::-webkit-scrollbar {
+    width: 5px;   /* Largura fina para WebKit */
+    height: 5px;  /* Altura fina para WebKit (para scroll horizontal) */
+  }
+  .project-contributors::-webkit-scrollbar-track {
+    background: transparent; /* Track transparente para WebKit */
+  }
+  .project-contributors::-webkit-scrollbar-thumb {
+    background: #ccc; /* Cor do thumb para WebKit */
+    border-radius: 3px; /* Bordas arredondadas para WebKit */
+  }
+  .project-contributors::-webkit-scrollbar-thumb:hover {
+    background: #aaa; /* Cor do thumb no hover para WebKit */
   }
 
   .contributor-profile {
