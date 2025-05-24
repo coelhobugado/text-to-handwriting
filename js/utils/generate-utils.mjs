@@ -4,6 +4,24 @@ const overlayEl = document.querySelector('.overlay');
 
 let paperContentPadding;
 
+/**
+ * @typedef {string} FontName - O nome de uma fonte.
+ */
+
+/**
+ * Verifica se a fonte atualmente selecionada (ou a padrão) é conhecida por ter problemas de renderização,
+ * como texto cortado no topo ou desalinhamento vertical.
+ *
+ * Esta função utiliza uma heurística baseada em nomes de fontes problemáticas conhecidas
+ * (ex: 'Homemade Apple') ou na ausência de uma fonte customizada explicitamente carregada pelo usuário.
+ * Se nenhuma fonte customizada foi carregada, assume-se que a fonte padrão pode ter o mesmo problema.
+ *
+ * @returns {boolean} Retorna `true` se a fonte atual é considerada "problemática", `false` caso contrário.
+ *
+ * @warning Esta é uma solução paliativa ("hack") e pode não cobrir todas as fontes problemáticas.
+ *          Pode precisar de atualização se os nomes das fontes mudarem ou novas fontes problemáticas
+ *          forem identificadas.
+ */
 function isFontErrory() {
   // SOme fonts have padding top errors, this functions tells you if the current font has that;
   const currentHandwritingFont = document.body.style.getPropertyValue(
@@ -38,6 +56,15 @@ function applyPaperStyles() {
     }deg, #0008, #0000)`;
   }
 
+  // Hack para fontes problemáticas:
+  // Se a fonte atual é conhecida por ter problemas de renderização (isFontErrory())
+  // E nenhuma fonte customizada foi carregada pelo usuário (document.querySelector('#font-file').files.length < 1),
+  // ajusta-se o paddingTop do elemento paperContentEl.
+  // Este ajuste visa compensar o desalinhamento vertical da fonte (texto cortado no topo)
+  // antes que o html2canvas capture a imagem da página.
+  // O valor de ajuste (-5px) foi provavelmente determinado empiricamente (tentativa e erro visual)
+  // para a fonte "Homemade Apple" e outras fontes padrão com comportamento similar.
+  // Este é um ajuste específico para o processo de geração da imagem e é revertido em removePaperStyles().
   if (isFontErrory() && document.querySelector('#font-file').files.length < 1) {
     paperContentPadding =
       paperContentEl.style.paddingTop.replace(/px/g, '') || 5;
@@ -56,6 +83,9 @@ function removePaperStyles() {
     overlayEl.classList.remove(document.querySelector('#page-effects').value);
   }
 
+  // Restaura o paddingTop original do paperContentEl se ele foi modificado anteriormente
+  // para uma fonte problemática. Isso garante que a visualização na tela permaneça consistente
+  // após a geração da imagem e a remoção dos estilos temporários.
   if (isFontErrory()) {
     paperContentEl.style.paddingTop = `${paperContentPadding}px`;
   }

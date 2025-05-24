@@ -88,10 +88,10 @@
     <link rel="manifest" href="./manifest.webmanifest" />
 
     <!-- Load Fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Homemade+Apple|Roboto|Caveat|Liu+Jian+Mao+Cao&display=swap"
-    />
+    <!-- As tags de fonte antigas foram removidas e substituídas pela tag consolidada abaixo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script:wght@400..700&family=Homemade+Apple&family=Indie+Flower&family=Liu+Jian+Mao+Cao&family=Patrick+Hand&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="./css/index.css" />
@@ -218,6 +218,15 @@
                       >
                         Liu Jian Mao Cao
                       </option>
+                      <option style="font-family: 'Dancing Script', cursive; font-size: 13pt;" value="'Dancing Script', cursive">
+                        Dancing Script
+                      </option>
+                      <option style="font-family: 'Patrick Hand', cursive; font-size: 13pt;" value="'Patrick Hand', cursive">
+                        Patrick Hand
+                      </option>
+                      <option style="font-family: 'Indie Flower', cursive; font-size: 13pt;" value="'Indie Flower', cursive">
+                        Indie Flower
+                      </option>
                     </select>
                   </div>
                   <div class="upload-handwriting-container">
@@ -281,6 +290,15 @@
                       <option selected value="2">Normal</option>
                       <option value="3">Alta</option>
                       <option value="4">Muito Alta</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block" for="paper-color">Cor do Papel</label>
+                    <select id="paper-color">
+                      <option value="white">Branco (Normal)</option>
+                      <option value="lightyellow">Amarelado</option>
+                      <option value="lightpink">Rosa Claro</option>
+                      <option value="lightblue">Azul Claro</option>
                     </select>
                   </div>
                 </div>
