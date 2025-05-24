@@ -60,6 +60,18 @@ async function convertDIVToImage() {
  * This is the function that gets called on clicking "Generate Image" button.
  */
 export async function generateImages() {
+  let hyphenatorPtBr = null; // Inicializa como null
+  if (typeof Hypher !== 'undefined' && typeof HypherPatternsPtBr !== 'undefined') {
+    try {
+      hyphenatorPtBr = new Hypher(HypherPatternsPtBr);
+    } catch (e) {
+      console.error("Erro ao inicializar Hypher com padrões pt-BR:", e);
+      // hyphenatorPtBr permanecerá null se houver erro
+    }
+  } else {
+    console.warn('Hypher ou padrões pt-BR (HypherPatternsPtBr) não foram carregados. A hifenização estará desativada.');
+  }
+
   applyPaperStyles();
   pageEl.scroll(0, 0);
 
@@ -97,12 +109,41 @@ export async function generateImages() {
       }
       paperContentEl.innerHTML = wordString;
       wordCount--;
+
+      let finalTextToRender = wordString;
+      if (hyphenatorPtBr && typeof hyphenatorPtBr.hyphenateText === 'function') {
+        try {
+          // Importante: Hypher espera texto puro. Se wordString contiver HTML,
+          // esta hifenização pode não ser ideal ou pode quebrar o HTML.
+          // Para uma melhor abordagem, seria necessário extrair nós de texto,
+          // hifenizá-los e reconstruir. Mas para esta tarefa, vamos tentar
+          // hifenizar a string diretamente, assumindo que é majoritariamente texto
+          // ou HTML simples que o Hypher pode não quebrar (ele busca palavras).
+          finalTextToRender = hyphenatorPtBr.hyphenateText(wordString);
+        } catch (e) {
+          console.error("Erro ao aplicar hifenização:", e);
+          // Em caso de erro, usa o texto original não hifenizado
+          finalTextToRender = wordString;
+        }
+      }
+      paperContentEl.innerHTML = finalTextToRender; // Define o conteúdo com hifenização (ou original se falhar)
+
       pageEl.scrollTo(0, 0);
       await convertDIVToImage();
-      paperContentEl.innerHTML = initialPaperContent;
+      paperContentEl.innerHTML = initialPaperContent; // Restaura para o conteúdo original para a próxima iteração
     }
   } else {
     // single image
+    let singlePageContent = paperContentEl.innerHTML;
+    if (hyphenatorPtBr && typeof hyphenatorPtBr.hyphenateText === 'function') {
+      try {
+        singlePageContent = hyphenatorPtBr.hyphenateText(singlePageContent);
+      } catch (e) {
+        console.error("Erro ao aplicar hifenização (página única):", e);
+      }
+    }
+    paperContentEl.innerHTML = singlePageContent;
+
     await convertDIVToImage();
   }
 
