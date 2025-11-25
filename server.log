@@ -1,0 +1,103 @@
+
+> text-to-handwriting@1.0.0-rc.1 dev
+> serve -l 5000 .
+
+ INFO  Accepting connections at http://localhost:5000
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 22 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /css/index.css
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /css/features.css
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /images/sun.svg
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /js/vendors/html2canvas.min.js
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 8 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 9 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 404 in 15 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /js/app.mjs
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /images/moon.svg
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 GET /images/dropdown.svg
+ HTTP  11/25/2025 1:51:03 PM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 404 in 2 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /js/utils/helpers.mjs
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /js/generate-images.mjs
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /js/utils/draw.mjs
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /js/utils/generate-utils.mjs
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /images/favicon-32x32-3.png
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /images/sun.svg
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 304 in 4 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /images/moon.svg
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /css/index.css
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 304 in 2 ms
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 GET /css/features.css
+ HTTP  11/25/2025 1:51:04 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 GET /images/sun.svg
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 Returned 304 in 2 ms
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 GET /images/moon.svg
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 GET /css/index.css
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 GET /css/features.css
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 GET /
+ HTTP  11/25/2025 1:51:05 PM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /css/index.css
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /css/features.css
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /images/sun.svg
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /images/moon.svg
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/html2canvas.min.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 404 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/app.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 404 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/helpers.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/generate-images.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/draw.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/generate-utils.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /css/index.css
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /css/features.css
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /images/sun.svg
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /images/moon.svg
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/app.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/html2canvas.min.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 3 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/vendors/hypher-patterns-pt-br.js
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 404 in 2 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/helpers.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 4 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/generate-images.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/draw.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 GET /js/utils/generate-utils.mjs
+ HTTP  11/25/2025 1:51:06 PM 127.0.0.1 Returned 304 in 3 ms
