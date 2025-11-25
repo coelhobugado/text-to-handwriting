@@ -1,3 +1,4 @@
+import { jsPDF } from 'jspdf';
 const pageEl = document.querySelector('.page-a');
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
