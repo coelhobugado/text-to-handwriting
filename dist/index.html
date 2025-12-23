@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-125454191-4"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-125454191-4');
+    </script>
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Basic -->
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#09f" />
+    <meta
+      name="description"
+      content="Eu odeio fazer trabalhos escritos, então criei esta ferramenta que converte texto em uma imagem que parece caligrafia. Você pode copiar e colar o conteúdo do texto na caixa de texto e clicar no botão gerar imagem para gerar a imagem. Texto para Caligrafia"
+    />
+    <meta
+      name="keywords"
+      content="texto para caligrafia, conversor de texto para caligrafia, saurabh texto para caligrafia, converter texto em imagem, escrever trabalho online"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="author" content="Saurabh Daware" />
+    <meta name="copyright" content="Saurabh Daware" />
+    <meta name="robots" content="follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Texto para Caligrafia" />
+    <meta
+      property="og:url"
+      content="https://saurabhdaware.github.io/text-to-handwriting"
+    />
+    <meta
+      property="og:description"
+      content="Eu odeio fazer trabalhos escritos, então criei esta ferramenta que converte texto em uma imagem que parece caligrafia. Você pode copiar e colar o conteúdo do texto na caixa de texto e clicar no botão gerar imagem para gerar a imagem. Texto para Caligrafia"
+    />
+    <meta property="og:site_name" content="Texto para Caligrafia" />
+
+    <meta
+      property="og:image:secure_url"
+      itemprop="image"
+      content="https://res.cloudinary.com/saurabhdaware/image/upload/v1585413874/saurabh2019/projects/text-to-handwriting.png"
+    />
+    <meta
+      property="og:image"
+      itemprop="image"
+      content="https://res.cloudinary.com/saurabhdaware/image/upload/v1585413874/saurabh2019/projects/text-to-handwriting.png"
+    />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="337" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@saurabhcodes" />
+
+    <title>Texto para Caligrafia</title>
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon-DAX_kBq0.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32-2zMkDXL9.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16-2CbisC3Y.png"
+    />
+
+    <!-- PWA Migration -->
+    <link rel="manifest" href="/assets/manifest-Cn8hQCQN.webmanifest" />
+
+    <!-- Load Fonts -->
+    <!-- As tags de fonte antigas foram removidas e substituídas pela tag consolidada abaixo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Dancing+Script:wght@400..700&family=Homemade+Apple&family=Indie+Flower&family=Liu+Jian+Mao+Cao&family=Patrick+Hand&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <script type="module" crossorigin src="/assets/index-DMAOk0RQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BfX4fL2M.css">
+  </head>
+
+  <body>
+    <!-- Font Loading Overlay -->
+    <div id="font-loading-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background-primary); z-index: 10000; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <h2 style="margin-bottom: 20px;">Carregando Fontes...</h2>
+      <p>Por favor aguarde um momento.</p>
+    </div>
+
+    <main>
+      <button
+        aria-label="Ativar Modo Escuro"
+        title="Alternar Modo Escuro"
+        aria-pressed="false"
+        onclick="toggleTheme(this)"
+        class="dark-mode-toggle"
+      >
+        <span class="sun">
+          <img
+            alt="ícone do sol que representa o modo claro"
+            width="35px"
+            src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20480%20480'%20width='480'%20height='480'%3e%3cstyle%3e%20.shp0%20{%20fill:%20%23222222%20}%20%3c/style%3e%3cpath%20id='Layer'%20fill-rule='evenodd'%20class='shp0'%20d='M335%20240.5C334.94%20292.67%20292.67%20334.94%20240.5%20335C188.31%20335%20146%20292.69%20146%20240.5C146%20188.31%20188.31%20146%20240.5%20146C292.69%20146%20335%20188.31%20335%20240.5ZM323.19%20240.5C323.14%20194.85%20286.15%20157.86%20240.5%20157.81C194.83%20157.81%20157.81%20194.83%20157.81%20240.5C157.81%20286.17%20194.83%20323.19%20240.5%20323.19C286.17%20323.19%20323.19%20286.17%20323.19%20240.5Z'%20/%3e%3cpath%20id='Layer'%20class='shp0'%20d='M138.17%20126.86L81.6%2070.3C81.45%2070.13%2081.29%2069.98%2081.13%2069.83C77.88%2066.84%2072.82%2067.05%2069.83%2070.3C66.83%2073.55%2067.05%2078.61%2070.3%2081.6L126.86%20138.18C128.36%20139.68%20130.4%20140.52%20132.52%20140.52C134.63%20140.52%20136.67%20139.68%20138.17%20138.18C141.29%20135.05%20141.29%20129.99%20138.17%20126.86Z'%20/%3e%3cpath%20id='Layer'%20class='shp0'%20d='M138.18%20342.02C135.11%20338.84%20130.04%20338.75%20126.86%20341.82L70.3%20398.39C68.8%20399.89%2067.95%20401.93%2067.95%20404.05C67.95%20408.46%2071.53%20412.05%2075.95%20412.05C78.07%20412.04%2080.1%20411.2%2081.6%20409.7L138.18%20353.14C141.17%20350.04%20141.17%20345.12%20138.18%20342.02Z'%20/%3e%3cpath%20id='Layer'%20class='shp0'%20d='M409.7%20398.4L353.14%20341.82C350.04%20338.83%20345.12%20338.83%20342.02%20341.82C338.84%20344.89%20338.75%20349.96%20341.82%20353.14L398.39%20409.7C399.89%20411.2%20401.93%20412.05%20404.05%20412.05L404.05%20412.06C406.17%20412.06%20408.2%20411.21%20409.7%20409.71C412.83%20406.59%20412.83%20401.52%20409.7%20398.4Z'%20/%3e%3cpath%20id='Layer%20copy'%20class='shp0'%20d='M468.74%20232.44L388.74%20232.03C384.43%20232.08%20380.93%20235.54%20380.84%20239.85C380.74%20244.27%20384.24%20247.93%20388.66%20248.03L468.65%20248.43C470.77%20248.44%20472.81%20247.61%20474.32%20246.12L474.33%20246.12C475.83%20244.63%20476.69%20242.6%20476.7%20240.48C476.72%20236.06%20473.16%20232.46%20468.74%20232.44Z'%20/%3e%3cpath%20id='Layer%20copy%202'%20class='shp0'%20d='M89.74%20232.44L9.74%20232.03C5.43%20232.08%201.93%20235.54%201.84%20239.85C1.74%20244.27%205.24%20247.93%209.66%20248.03L89.65%20248.43C91.77%20248.44%2093.81%20247.61%2095.32%20246.12L95.33%20246.12C96.83%20244.63%2097.69%20242.6%2097.7%20240.48C97.72%20236.06%2094.16%20232.46%2089.74%20232.44Z'%20/%3e%3cpath%20id='Layer%20copy%203'%20class='shp0'%20d='M248.56%2091.2L248.96%2011.2C248.91%206.89%20245.45%203.39%20241.14%203.3C236.73%203.2%20233.07%206.7%20232.97%2011.12L232.57%2091.12C232.55%2093.24%20233.39%2095.28%20234.88%2096.78L234.87%2096.79C236.37%2098.3%20238.39%2099.15%20240.52%2099.16C244.93%2099.18%20248.53%2095.62%20248.56%2091.2Z'%20/%3e%3cpath%20id='Layer%20copy%204'%20class='shp0'%20d='M247.56%20470.2L247.96%20390.2C247.91%20385.89%20244.45%20382.39%20240.14%20382.3C235.73%20382.2%20232.07%20385.7%20231.97%20390.12L231.57%20470.12C231.55%20472.24%20232.39%20474.28%20233.88%20475.78L233.87%20475.79C235.37%20477.3%20237.39%20478.15%20239.52%20478.16C243.93%20478.18%20247.53%20474.62%20247.56%20470.2Z'%20/%3e%3cpath%20id='Layer'%20class='shp0'%20d='M409.7%2069.83C406.45%2066.84%20401.39%2067.05%20398.4%2070.3L341.82%20126.86C340.32%20128.36%20339.48%20130.4%20339.48%20132.52C339.48%20136.94%20343.06%20140.52%20347.48%20140.52C349.6%20140.52%20351.64%20139.67%20353.14%20138.17L409.7%2081.6C409.87%2081.45%20410.02%2081.29%20410.17%2081.13C413.17%2077.88%20412.95%2072.82%20409.7%2069.83Z'%20/%3e%3c/svg%3e"
+        /></span>
+        <span class="moon"
+          ><img
+            alt="ícone da lua para representar o modo escuro"
+            width="25px"
+            src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='iso-8859-1'?%3e%3c!--%20Generator:%20Adobe%20Illustrator%2019.0.0,%20SVG%20Export%20Plug-In%20.%20SVG%20Version:%206.00%20Build%200)%20--%3e%3csvg%20version='1.1'%20id='Capa_1'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20x='0px'%20y='0px'%20viewBox='0%200%20312.999%20312.999'%20style='enable-background:new%200%200%20312.999%20312.999;'%20xml:space='preserve'%3e%3cstyle%3e%20path%20{%20fill:%20%23aaaaaa%20}%20%3c/style%3e%3cpath%20d='M305.6,178.053c-3.2-0.8-6.4,0-9.2,2c-10.4,8.8-22.4,16-35.6,20.8c-12.4,4.8-26,7.2-40.4,7.2c-32.4,0-62-13.2-83.2-34.4%20c-21.2-21.2-34.4-50.8-34.4-83.2c0-13.6,2.4-26.8,6.4-38.8c4.4-12.8,10.8-24.4,19.2-34.4c3.6-4.4,2.8-10.8-1.6-14.4%20c-2.8-2-6-2.8-9.2-2c-34,9.2-63.6,29.6-84.8,56.8c-20.4,26.8-32.8,60-32.8,96.4c0,43.6,17.6,83.2,46.4,112s68.4,46.4,112,46.4%20c36.8,0,70.8-12.8,98-34c27.6-21.6,47.6-52.4,56-87.6C314.4,184.853,311.2,179.253,305.6,178.053z%20M244.4,261.653%20c-23.2,18.4-52.8,29.6-85.2,29.6c-38,0-72.4-15.6-97.2-40.4c-24.8-24.8-40.4-59.2-40.4-97.2c0-31.6,10.4-60.4,28.4-83.6%20c12.4-16,28-29.2,46-38.4c-2,4.4-4,8.8-5.6,13.6c-5.2,14.4-7.6,29.6-7.6,45.6c0,38,15.6,72.8,40.4,97.6s59.6,40.4,97.6,40.4%20c16.8,0,32.8-2.8,47.6-8.4c5.2-2,10.4-4,15.2-6.4C274,232.453,260.8,248.853,244.4,261.653z'/%3e%3c/svg%3e"
+        /></span>
+      </button>
+      <h1>Texto para Caligrafia</h1>
+      <section class="generate-image-section">
+        <br /><br />
+        <form id="generate-image-form">
+          <!-- Generate Image Section -->
+          <div class="display-flex output-grid responsive-flex">
+            <div class="flex-1 page-container-super">
+              <div>
+                <h2 style="margin-top: 0px;">Entrada</h2>
+                <label class="block" for="note">Digite/cole o texto aqui</label>
+              </div>
+
+              <div class="flex-1 page-container">
+                <div class="page-a margined lines">
+                  <div contenteditable="true" class="top-margin"></div>
+                  <div class="display-flex left-margin-and-content">
+                    <div contenteditable="true" class="left-margin"></div>
+                    <div class="paper-content" id="note" contenteditable="true">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Ut rhoncus dui eget tortor feugiat iaculis. Morbi et dolor
+                      in felis viverra efficitur. Integer id laoreet arcu.
+                      Mauris turpis nibh, scelerisque sed tristique non,
+                      hendrerit in erat. Duis interdum nisl risus, ac ultrices
+                      ipsum auctor at. Aliquam faucibus iaculis metus sit amet
+                      tincidunt. Vestibulum cursus urna vel nunc imperdiet
+                      suscipit. Ut eu augue egestas, porta orci lobortis,
+                      pharetra orci. Morbi eu tellus quis nisi tempor accumsan
+                      nec eu urna. empor, ullamcorper tortor. Mauris quis
+                      fermentum augue. Phasellus ac nisl hendrerit, fringilla
+                      enim aliquam, placerat odio. Ut tortor nisi, pellentesque
+                      sed nisi at, hendrerit imperdiet turpis. Proin interdum
+                      porttitor metus at hendrerit. Proin ipsum nisl, lacinia
+                      vitae purus ullamcorper, maximus convallis sem. Sed nec
+                      lacinia lorem. Duis arcu metus, cursus non odio quis,
+                      tincidunt tempor augue. Donec eget vestibulum risus.
+                      Nullam blandit quis est vitae feugiat.
+                    </div>
+                  </div>
+                  <div class="overlay"></div>
+                </div>
+                <br />
+              </div>
+
+              <div>
+                <button
+                  id="draw-diagram-button"
+                  type="button"
+                  style="font-size: 0.9rem; margin-top: 5px;"
+                  class="draw-button"
+                >
+                  Desenhar <small>(Beta)</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="customization-col">
+              <!-- Handwriting Font -->
+              <div style="padding: 5px 0px 5px 0px;">
+                <b>Personalizações</b> <small>(Opcional)</small>
+                <p style="font-size: 0.8rem;">
+                  <em
+                    >Observação: Poucas alterações podem refletir apenas na imagem gerada
+                    e não na visualização</em
+                  >
+                </p>
+              </div>
+              <fieldset>
+                <legend>Opções de Caligrafia</legend>
+
+                <div class="category-grid">
+                  <div>
+                    <label class="block" for="handwriting-font"
+                      >Fonte de Caligrafia</label
+                    >
+                    <select id="handwriting-font">
+                      <option
+                        selected
+                        style="font-family: 'Homemade Apple';"
+                        value="'Homemade Apple', cursive"
+                      >
+                        Homemade Apple
+                      </option>
+                      <option value="Hindi_Font">Kruti-dev(Hindi)</option>
+                      <option
+                        style="font-family: 'Caveat', cursive; font-size: 13pt;"
+                        value="'Caveat', cursive"
+                      >
+                        Caveat
+                      </option>
+                      <option
+                        style="
+                          font-family: 'Liu Jian Mao Cao';
+                          font-size: 13pt;
+                        "
+                        value="'Liu Jian Mao Cao', cursive"
+                      >
+                        Liu Jian Mao Cao
+                      </option>
+                      <option style="font-family: 'Dancing Script', cursive; font-size: 13pt;" value="'Dancing Script', cursive">
+                        Dancing Script
+                      </option>
+                      <option style="font-family: 'Patrick Hand', cursive; font-size: 13pt;" value="'Patrick Hand', cursive">
+                        Patrick Hand
+                      </option>
+                      <option style="font-family: 'Indie Flower', cursive; font-size: 13pt;" value="'Indie Flower', cursive">
+                        Indie Flower
+                      </option>
+                    </select>
+                  </div>
+                  <div class="upload-handwriting-container">
+                    <label class="block" for="font-file"
+                      >Envie sua fonte de caligrafia <small>(Beta)</small> 
+                      <a
+                        style="font-size: 1.1rem;"
+                        title="Como adicionar sua própria caligrafia"
+                        href="#how-to-add-handwriting"
+                      >
+                        ⓘ
+                      </a>
+                    </label>
+                    <input accept=".ttf, .otf" type="file" id="font-file" />
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Pen ink color, Font size, Vertical position text, Word Spacing -->
+              <fieldset>
+                <legend>Opções de Página e Texto</legend>
+
+                <div class="category-grid">
+                  <div class="postfix-input" data-postfix="pt">
+                    <label for="font-size">Tamanho da Fonte</label>
+                    <input
+                      id="font-size"
+                      min="0"
+                      step="0.5"
+                      value="10"
+                      type="number"
+                    />
+                  </div>
+                  <div>
+                    <label class="block" for="ink-color">Cor da Tinta</label>
+                    <select id="ink-color">
+                      <option default value="#000f55">Azul</option>
+                      <option value="black">Preto</option>
+                      <option value="#ba3807">Vermelho</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block" for="page-size">Tamanho da Página</label>
+                    <select id="page-size">
+                      <option default value="a4">A4  </option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block" for="page-effects">Efeitos</label>
+                    <select id="page-effects">
+                      <option default value="shadows">Sombras</option>
+                      <option value="scanner">Scanner</option>
+                      <option value="no-effect">Sem Efeito</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block" for="resolution">Resolução</label>
+                    <select id="resolution">
+                      <option value="0.8">Muito Baixa</option>
+                      <option value="1">Baixa</option>
+                      <option selected value="2">Normal</option>
+                      <option value="3">Alta</option>
+                      <option value="4">Muito Alta</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block" for="paper-color">Cor do Papel</label>
+                    <select id="paper-color">
+                      <option value="white">Branco (Normal)</option>
+                      <option value="lightyellow">Amarelado</option>
+                      <option value="lightpink">Rosa Claro</option>
+                      <option value="lightblue">Azul Claro</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Opções de Espaçamento</legend>
+
+                <div class="category-grid">
+                  <div class="postfix-input" data-postfix="px">
+                    <label for="top-padding">Posição Vertical</label>
+                    <input id="top-padding" min="0" value="5" type="number" />
+                  </div>
+                  <div class="postfix-input" data-postfix="px">
+                    <label for="word-spacing">Espaçamento entre Palavras</label>
+                    <input
+                      id="word-spacing"
+                      min="0"
+                      max="100"
+                      value="0"
+                      type="number"
+                    />
+                  </div>
+                  <div class="postfix-input" data-postfix="pt">
+                    <label for="letter-spacing">Espaçamento entre Letras</label>
+                    <input
+                      id="letter-spacing"
+                      min="-5"
+                      max="40"
+                      value="0"
+                      type="number"
+                    />
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Letter spacing, Paper Margin, Paper Lines, Paper Curvature -->
+              <fieldset>
+                <legend>Opções de Margem e Linha</legend>
+
+                <div class="category-grid">
+                  <div>
+                    <label for="paper-margin-toggle"
+                      >Margem do Papel:
+                      <span aria-label="status da margem do papel" class="status"
+                        >ligado</span
+                      >
+                    </label>
+                    <label class="switch-toggle outer">
+                      <input
+                        aria-checked="true"
+                        checked
+                        aria-label="Botão de Margem do Papel"
+                        id="paper-margin-toggle"
+                        type="checkbox"
+                      />
+                      <div></div>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label for="paper-line-toggle"
+                      >Linhas do Papel:
+                      <span aria-label="status da linha do papel" class="status"
+                        >ligado</span
+                      >
+                    </label>
+                    <label class="switch-toggle outer">
+                      <input
+                        aria-checked="true"
+                        checked
+                        aria-label="Botão de Linha do Papel"
+                        id="paper-line-toggle"
+                        type="checkbox"
+                      />
+                      <div></div>
+                    </label>
+                  </div>
+                  <div class="experimental">
+                    <!-- Removed option -->
+                    <div class="upload-paper-container">
+                      <label class="block" for="paper-file"
+                        >Carregar Imagem do Papel como Fundo</label
+                      >
+                      <input
+                        accept=".jpg, .jpeg, .png"
+                        type="file"
+                        id="paper-file"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Humanization Toggle -->
+              <fieldset>
+                <legend>Opções de Realismo</legend>
+                <div class="category-grid">
+                  <div style="display: flex; align-items: center;">
+                    <label class="switch-toggle outer" style="margin-right: 10px;">
+                      <input
+                        aria-checked="false"
+                        aria-label="Botão Humanizar"
+                        id="humanize-toggle"
+                        type="checkbox"
+                      />
+                      <div></div>
+                    </label>
+                    <label for="humanize-toggle">Humanizar (Beta)</label>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- GENERATE IMAGE BUTTONS -->
+              <hr
+                style="
+                  border: 0.3px solid var(--elevation-background);
+                  width: 80%;
+                "
+              />
+              <div style="text-align: center; padding: 30px 0px;">
+                <button
+                  type="submit"
+                  data-testid="generate-image-button"
+                  class="button generate-image-button"
+                >
+                  Gerar Imagem
+                </button>
+                <div style="margin-top: 15px; display: flex; justify-content: center; align-items: center;">
+                  <label class="switch-toggle outer" style="margin-right: 10px;">
+                    <input
+                      aria-checked="false"
+                      aria-label="Botão Auto-Gerar"
+                      id="auto-generate-toggle"
+                      type="checkbox"
+                    />
+                    <div></div>
+                  </label>
+                  <label for="auto-generate-toggle">Auto-Gerar (Live Preview)</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- OUTPUT -->
+      <section>
+        <h2 id="output-header">Saída</h2>
+        <div id="output" class="output" style="text-align: center;">
+          Clique no botão "Gerar Imagem" para gerar uma nova imagem.
+        </div>
+        <div style="text-align: center; padding: 30px;">
+          <button class="imp-button" id="download-as-pdf-button">
+            Baixar Todas as Imagens como PDF
+          </button>
+          <button class="delete-button" id="delete-all-button">
+            Limpar todas as imagens
+          </button>
+        </div>
+      </section>
+
+      <section id="how-to-add-handwriting">
+        <h2>🤓 Guia para adicionar sua própria caligrafia</h2>
+        <div>
+          <ul>
+            <li>
+              Para usar sua caligrafia, você terá que gerar uma fonte da sua
+              caligrafia.
+            </li>
+            <li>
+              Existem sites como
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.calligraphr.com/en/"
+                >Calligraphr</a
+              >
+              que permitem que você faça isso.
+            </li>
+            <li>
+              Depois de obter o arquivo .ttf da sua caligrafia, carregue-o a partir do botão 'Envie sua fonte de caligrafia' nas seções de personalizações
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="sponsors">
+        <h2>🤗 Patrocinadores</h2>
+        <p>
+          Esta ferramenta é totalmente gratuita e não armazena nenhum dos seus dados por
+          dinheiro, então talvez você possa considerar ser um patrono ou fazer um pagamento único com o buy me a coffee para ajudar o criador 🤗
+        </p>
+        <p>
+          <a href="https://www.patreon.com/bePatron?u=31891872">
+            <img
+              loading="lazy"
+              style="border-radius: 4px;"
+              alt="Botão Compre-me um Café"
+              width="200"
+              src="https://c5.patreon.com/external/logo/become_a_patron_button.png"
+            />
+          </a>
+           
+          <a href="https://www.buymeacoffee.com/saurabhdaware">
+            <img
+              loading="lazy"
+              style="border-radius: 4px;"
+              alt="Botão Compre-me um Café"
+              width="200"
+              src="https://cdn.buymeacoffee.com/buttons/default-yellow.png"
+            />
+          </a>
+        </p>
+      </section>
+
+      <section id="github-contributors">
+        <h2>👫 Contribuidores do GitHub</h2>
+        <div class="project-contributors" id="project-contributors"></div>
+      </section>
+
+      <section id="faq">
+        <h2>❓ FAQs (Perguntas Frequentes)</h2>
+        <div>
+          <h3>1. Como posso adicionar minha própria caligrafia?</h3>
+          <p>
+            Confira o
+            <a href="#how-to-add-handwriting"
+              >Guia para adicionar sua própria caligrafia</a
+            >
+          </p>
+        </div>
+        <div>
+          <h3>2. Onde posso conseguir mais fontes?</h3>
+          <p>
+            Você pode usar fontes de
+            <a
+              href="https://www.quantumenterprises.co.uk/handwriting-fonts/fontvault.htm"
+              >https://www.quantumenterprises.co.uk/handwriting-fonts/fontvault.htm</a
+            >
+          </p>
+        </div>
+        <div>
+          <h3>3. Existem lacunas entre as letras nas fontes personalizadas</h3>
+          <p>
+            Este é um problema conhecido para o qual não descobrimos a solução.
+            Como uma solução temporária, existe a opção de espaçamento entre letras e palavras
+            para ajustar o espaço.
+          </p>
+        </div>
+        <div>
+          <h3>4. Onde posso solicitar recursos e relatar bugs?</h3>
+          <p>
+            Você não pode. Este é um projeto somente leitura e não haverá
+            melhorias no projeto
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer style="padding: 40px 0px 10px 0px;">
+      Obrigado por usar o Texto para Caligrafia! Você pode me seguir no
+      <a href="https://twitter.com/saurabhcodes">Twitter @saurabhcodes</a>
+      <br /><br />Não se esqueça de estrelar o
+      <a href="https://github.com/saurabhdaware/text-to-handwriting"
+        >Repositório GitHub Texto-para-Caligrafia</a
+      >
+      e Se você estiver usando para fazer trabalhos, certifique-se de usá-lo por
+      sua conta e risco e Se falhar e seu professor encontrar esta ferramenta, peça a ele
+      para estrelar meu GitHub também :D <br />
+      <br />tchauzinho! <br /><br />
+      ~ Saurabh (<a href="https://saurabhdaware.in">https://saurabhdaware.in</a
+      >)
+    </footer>
+
+    <!-- Fixed Elements -->
+    <section class="draw-container popup-container">
+      <button class="close-button">×</button>
+      <div class="display-flex responsive-flex">
+        <canvas
+          id="diagram-canvas"
+          style="background-color: #fff;"
+          height="300px"
+          width="600px"
+        ></canvas>
+        <div class="flex-1 buttons-container padding-around">
+          <button
+            id="add-to-paper-button"
+            style="margin-top: 5px; margin-bottom: 5px;"
+          >
+            Adicionar ao Papel
+          </button>
+          <button
+            id="draw-download-button"
+            style="margin-top: 5px; margin-bottom: 5px;"
+          >
+            Baixar Imagem
+          </button>
+          <br /><br />
+          <input
+            type="file"
+            id="image-to-add-in-canvas"
+            accept="image/x-png,image/jpeg"
+            hidden="hidden"
+          />
+          <br /><br /><button id="add-new-image-button">Adicionar imagem de fundo</button>
+          <br /><br />
+          <button
+            id="clear-draw-canvas"
+            class="blue-button"
+            style="background-color: #f30; color: #fff;"
+          >
+            Limpar Tela
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- GitHub Corner logo -->
+    <a
+      tabindex="0"
+      href="https://github.com/saurabhdaware/text-to-handwriting"
+      rel="noopener noreferrer"
+      target="_blank"
+      class="github-corner"
+      aria-label="Ver código fonte no GitHub"
+    >
+      <svg
+        width="80"
+        height="80"
+        viewBox="0 0 250 250"
+        style="
+          fill: #151513;
+          color: #fff;
+          position: absolute;
+          top: 0;
+          border: 0;
+          right: 0;
+        "
+        aria-hidden="true"
+      >
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor"
+          style="transform-origin: 130px 106px;"
+          class="octo-arm"
+        ></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor"
+          class="octo-body"
+        ></path>
+      </svg>
+    </a>
+
+    <script>
+      function toggleTheme(toggleButton) {
+        if (document.body.classList.contains('dark')) {
+          document.body.classList.add('fade-in-light');
+          document.body.classList.remove('dark');
+          document.body.classList.remove('fade-in-dark');
+          window.localStorage.setItem('prefers-theme', 'light');
+          if (toggleButton) {
+            toggleButton.setAttribute('aria-pressed', false);
+            toggleButton.setAttribute('aria-label', 'Ativar Modo Escuro');
+          }
+        } else {
+          document.body.classList.add('fade-in-dark');
+          document.body.classList.add('dark');
+          document.body.classList.remove('fade-in-light');
+          window.localStorage.setItem('prefers-theme', 'dark');
+          if (toggleButton) {
+            toggleButton.setAttribute('aria-pressed', true);
+            toggleButton.setAttribute('aria-label', 'Ativar Modo Claro');
+          }
+        }
+      }
+
+      const localPreference = window.localStorage.getItem('prefers-theme');
+      if (localPreference) {
+        if (localPreference === 'light') document.body.classList.remove('dark');
+        else document.body.classList.add('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+      }
+
+      document.querySelectorAll('#donations a[href]').forEach((anchorEl) => {
+        anchorEl.addEventListener('click', (e) => {
+          const tracker = ga.getAll()[0];
+          let label;
+          if (e.target.href) {
+            label = e.target.href;
+          } else {
+            label = e.target.parentElement.href;
+          }
+
+          if (tracker) {
+            tracker.send('event', 'Donation Link', 'Click', label);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

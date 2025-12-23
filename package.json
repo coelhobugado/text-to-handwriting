@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/coelhobugado/text-to-handwriting/issues"
   },
-  "homepage": "https://github.com/coelhobugado/text-to-handwriting#readme",
+  "homepage": "https://text-to-handwriting-ag.netlify.app",
   "devDependencies": {
     "cypress": "^15.7.0",
     "eslint": "^9.39.1",
