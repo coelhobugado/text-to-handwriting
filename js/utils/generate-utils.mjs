@@ -24,9 +24,8 @@ let paperContentPadding;
  */
 function isFontErrory() {
   // SOme fonts have padding top errors, this functions tells you if the current font has that;
-  const currentHandwritingFont = document.body.style.getPropertyValue(
-    '--handwriting-font'
-  );
+  const currentHandwritingFont =
+    document.body.style.getPropertyValue('--handwriting-font');
   return (
     currentHandwritingFont === '' ||
     currentHandwritingFont.includes('Homemade Apple')
@@ -44,7 +43,7 @@ function applyPaperStyles() {
     // Para 'scanner', usamos o efeito pós-processado no Canvas (applyScannerEffect em generate-images.mjs).
     // Não aplicamos CSS overlay aqui para evitar conflitos ou duplicação.
     overlayEl.style.background = 'none';
-    overlayEl.classList.remove('shadows'); 
+    overlayEl.classList.remove('shadows');
   } else if (effect === 'shadows') {
     overlayEl.classList.add('shadows');
     overlayEl.style.background = `linear-gradient(${
@@ -53,7 +52,7 @@ function applyPaperStyles() {
   } else {
     // No Effect
     overlayEl.style.background = 'none';
-    overlayEl.classList.remove('shadows'); 
+    overlayEl.classList.remove('shadows');
   }
 
   // Hack para fontes problemáticas:

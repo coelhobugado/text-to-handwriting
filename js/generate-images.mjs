@@ -32,7 +32,7 @@ async function convertDIVToImage() {
   };
 
   /** Function html2canvas comes from a library html2canvas which is included in the index.html */
-  const canvas = await html2canvas(pageEl, options).catch(error => {
+  const canvas = await html2canvas(pageEl, options).catch((error) => {
     console.error('Erro durante a geração da imagem por html2canvas:', error);
     console.warn('Falha ao gerar imagem. Verifique o console para detalhes.'); // TODO: Substituir por uma notificação de UI não bloqueante
     // Se houvesse um indicador de "carregando" global, ele seria desativado aqui.
@@ -61,16 +61,20 @@ async function convertDIVToImage() {
  * This is the function that gets called on clicking "Generate Image" button.
  */
 // Função auxiliar para esperar um pouco e liberar a Main Thread
-const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+const nextFrame = () =>
+  new Promise((resolve) => requestAnimationFrame(resolve));
 
 export async function generateImages() {
   console.time('Generation Time');
   let hyphenatorPtBr = null; // Inicializa como null
-  if (typeof Hypher !== 'undefined' && typeof HypherPatternsPtBr !== 'undefined') {
+  if (
+    typeof Hypher !== 'undefined' &&
+    typeof HypherPatternsPtBr !== 'undefined'
+  ) {
     try {
       hyphenatorPtBr = new Hypher(HypherPatternsPtBr);
     } catch (e) {
-      console.error("Erro ao inicializar Hypher com padrões pt-BR:", e);
+      console.error('Erro ao inicializar Hypher com padrões pt-BR:', e);
       // hyphenatorPtBr permanecerá null se houver erro
     }
   } else {
@@ -99,25 +103,28 @@ export async function generateImages() {
     let currentIndex = 0;
     while (currentIndex < splitContent.length) {
       paperContentEl.innerHTML = '';
-      
+
       // Binary Search para encontrar o índice máximo que cabe na página
       let low = 1;
       let high = splitContent.length - currentIndex;
       let bestFitCount = 0;
 
-      // Se high for pequeno, talvez não precise de busca binária? 
+      // Se high for pequeno, talvez não precise de busca binária?
       // Mas para manter performance consistente, usamos BS.
-      
+
       // Otimização: Se soubéssemos a média de palavras por página, poderíamos começar 'low' perto disso.
       // Mas vamos manter BS simples (O(log N)).
-      
+
       while (low <= high) {
         const mid = Math.floor((low + high) / 2);
-        const attemptWords = splitContent.slice(currentIndex, currentIndex + mid);
+        const attemptWords = splitContent.slice(
+          currentIndex,
+          currentIndex + mid
+        );
         const attemptString = attemptWords.join(''); // Split preserve delims, so join with empty string
 
         paperContentEl.innerHTML = attemptString;
-        
+
         // Verifica se cabe
         if (paperContentEl.scrollHeight <= clientHeight) {
           bestFitCount = mid;
@@ -127,41 +134,46 @@ export async function generateImages() {
         }
       }
 
-      // Se bestFitCount for 0, significa que uma única palavra é maior que a página (caso raro/quebrado), 
+      // Se bestFitCount for 0, significa que uma única palavra é maior que a página (caso raro/quebrado),
       // forçamos pelo menos 1 para não entrar em loop infinito.
       if (bestFitCount === 0) bestFitCount = 1;
 
       // Pega o conteúdo final da página
-      const pageWords = splitContent.slice(currentIndex, currentIndex + bestFitCount);
+      const pageWords = splitContent.slice(
+        currentIndex,
+        currentIndex + bestFitCount
+      );
       let finalText = pageWords.join('');
-      
+
       // Aplica hifenização no bloco que coube
-      if (hyphenatorPtBr && typeof hyphenatorPtBr.hyphenateText === 'function') {
+      if (
+        hyphenatorPtBr &&
+        typeof hyphenatorPtBr.hyphenateText === 'function'
+      ) {
         try {
           finalText = hyphenatorPtBr.hyphenateText(finalText);
         } catch (e) {
-          console.error("Erro ao aplicar hifenização:", e);
+          console.error('Erro ao aplicar hifenização:', e);
         }
       }
-      
+
       paperContentEl.innerHTML = finalText;
       pageEl.scrollTo(0, 0);
-      
+
       // Libera UI antes de renderizar (pesado)
       await nextFrame();
-      
+
       await convertDIVToImage();
 
       // Avança o índice
       currentIndex += bestFitCount;
 
       // Reseta para a próxima iteração (necessário para limpar estilos residuais se houver)
-      paperContentEl.innerHTML = ''; 
+      paperContentEl.innerHTML = '';
     }
-    
+
     // Restaura conteúdo original
     paperContentEl.innerHTML = initialPaperContent;
-
   } else {
     // single image logic remains mostly same
     let singlePageContent = paperContentEl.innerHTML;
@@ -169,7 +181,7 @@ export async function generateImages() {
       try {
         singlePageContent = hyphenatorPtBr.hyphenateText(singlePageContent);
       } catch (e) {
-        console.error("Erro ao aplicar hifenização (página única):", e);
+        console.error('Erro ao aplicar hifenização (página única):', e);
       }
     }
     paperContentEl.innerHTML = singlePageContent;
@@ -177,7 +189,7 @@ export async function generateImages() {
     await nextFrame(); // Yield
     await convertDIVToImage();
   }
-  
+
   console.timeEnd('Generation Time');
 
   removePaperStyles();
@@ -223,19 +235,7 @@ export const moveRight = (index) => {
  */
 export const downloadAsPDF = () => createPDF(outputImages);
 
-/** Modifies image data to add contrast */
-
-function contrastImage(imageData, contrast) {
-  const data = imageData.data;
-  contrast *= 255;
-  const factor = (contrast + 255) / (255.01 - contrast);
-  for (let i = 0; i < data.length; i += 4) {
-    data[i] = factor * (data[i] - 128) + 128;
-    data[i + 1] = factor * (data[i + 1] - 128) + 128;
-    data[i + 2] = factor * (data[i + 2] - 128) + 128;
-  }
-  return imageData;
-}
+// contrastImage removed as it was unused
 
 // Event Delegation for output image controls
 if (outputContainer) {

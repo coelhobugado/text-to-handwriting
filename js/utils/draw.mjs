@@ -133,7 +133,7 @@ const onMouseDown = (e) => {
   drawPoint(e.clientX, e.clientY);
 };
 
-const onMouseUp = (e) => {
+const onMouseUp = () => {
   isMouseDown = false;
   lastX = 0;
   lastY = 0;
@@ -155,7 +155,7 @@ const onTouchStart = (e) => {
   drawPoint(touchX, touchY);
 };
 
-const onTouchEnd = (e) => {
+const onTouchEnd = () => {
   isMouseDown = false;
   lastX = 0;
   lastY = 0;

@@ -6,13 +6,19 @@ function addFontFromFile(fileObj) {
   const reader = new FileReader();
   reader.onload = (e) => {
     const newFont = new FontFace('temp-font', e.target.result);
-    newFont.load().then((loadedFace) => {
-      document.fonts.add(loadedFace);
-      pageEl.style.fontFamily = 'temp-font';
-    }).catch(error => {
-      console.error('Erro ao carregar FontFace:', error);
-      console.warn('Falha ao carregar arquivo de fonte. A fonte pode estar inválida ou corrompida.'); // TODO: Substituir por notificação de UI
-    });
+    newFont
+      .load()
+      .then((loadedFace) => {
+        document.fonts.add(loadedFace);
+        pageEl.style.fontFamily = 'temp-font';
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar FontFace:', error);
+        console.warn(
+          'Falha ao carregar arquivo de fonte. ' +
+            'A fonte pode estar inválida ou corrompida.'
+        ); // TODO: Substituir por notificação de UI
+      });
   };
   reader.onerror = (error) => {
     console.error('Erro do FileReader ao ler arquivo de fonte:', error);
@@ -28,8 +34,6 @@ function addFontFromFile(fileObj) {
  * Creates PDF from list of given images
  */
 function createPDF(imgs) {
-  // eslint-disable-next-line new-cap
-  // eslint-disable-next-line new-cap
   const doc = new jsPDF('p', 'pt', 'a4');
   const width = doc.internal.pageSize.width;
   const height = doc.internal.pageSize.height;
@@ -45,7 +49,8 @@ function createPDF(imgs) {
       height - 80,
       'image-' + index // Alterado de 'image-' + i
     );
-    if (index !== imgs.length - 1) { // Alterado de i != imgs.length - 1
+    if (index !== imgs.length - 1) {
+      // Alterado de i != imgs.length - 1
       doc.addPage();
     }
   });
@@ -95,11 +100,18 @@ function addPaperFromFile(file) {
 
 function debounce(func, wait) {
   let timeout;
-  return function(...args) {
+  return function (...args) {
     const context = this;
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(context, args), wait);
   };
 }
 
-export { isMobile, addFontFromFile, createPDF, formatText, addPaperFromFile, debounce };
+export {
+  isMobile,
+  addFontFromFile,
+  createPDF,
+  formatText,
+  addPaperFromFile,
+  debounce
+};

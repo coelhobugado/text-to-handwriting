@@ -22,7 +22,7 @@ export class SettingsController {
 
     this.bind('#font-size', 'change', (e) => {
       if (e.target.value > 30) {
-        console.warn('Font too big'); 
+        console.warn('Font too big');
       } else {
         this.setTextareaStyle('fontSize', e.target.value + 'pt');
         // e.preventDefault(); // Unnecessary for change event usually
@@ -44,7 +44,9 @@ export class SettingsController {
         e.target.value + 'px';
     });
 
-    this.bind('#font-file', 'change', (e) => addFontFromFile(e.target.files[0]));
+    this.bind('#font-file', 'change', (e) =>
+      addFontFromFile(e.target.files[0])
+    );
 
     this.bind('#ink-color', 'change', (e) => {
       document.body.style.setProperty('--ink-color', e.target.value);
@@ -57,13 +59,19 @@ export class SettingsController {
       if (val === 'lightyellow') colorVar = 'var(--paper-color-lightyellow)';
       else if (val === 'lightpink') colorVar = 'var(--paper-color-lightpink)';
       else if (val === 'lightblue') colorVar = 'var(--paper-color-lightblue)';
-      
+
       document.body.style.setProperty('--current-paper-color', colorVar);
     });
 
-    this.bind('#paper-margin-toggle', 'change', () => this.pageEl.classList.toggle('margined'));
-    this.bind('#paper-line-toggle', 'change', () => this.pageEl.classList.toggle('lines'));
-    this.bind('#paper-file', 'change', (e) => addPaperFromFile(e.target.files[0]));
+    this.bind('#paper-margin-toggle', 'change', () =>
+      this.pageEl.classList.toggle('margined')
+    );
+    this.bind('#paper-line-toggle', 'change', () =>
+      this.pageEl.classList.toggle('lines')
+    );
+    this.bind('#paper-file', 'change', (e) =>
+      addPaperFromFile(e.target.files[0])
+    );
 
     // Humanization Logic
     this.bind('#humanize-toggle', 'change', (e) => {
@@ -71,12 +79,15 @@ export class SettingsController {
       if (e.target.checked) applyHumanization(contentEl, true);
       else cleanupHumanization(contentEl);
     });
-    
+
     // Switch Toggles Accessibility (Visual Feedback)
     document.querySelectorAll('.switch-toggle input').forEach((toggleInput) => {
-      toggleInput.addEventListener('change', (e) => {
-        const label = document.querySelector(`label[for="${toggleInput.id}"] .status`);
-        if (label) label.textContent = toggleInput.checked ? 'ligado' : 'desligado';
+      toggleInput.addEventListener('change', () => {
+        const label = document.querySelector(
+          `label[for="${toggleInput.id}"] .status`
+        );
+        if (label)
+          label.textContent = toggleInput.checked ? 'ligado' : 'desligado';
         toggleInput.setAttribute('aria-checked', toggleInput.checked);
       });
     });

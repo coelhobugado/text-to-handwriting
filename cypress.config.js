@@ -7,6 +7,6 @@ module.exports = defineConfig({
     supportFile: false,
     videosFolder: 'tests/videos',
     screenshotsFolder: 'tests/screenshots',
-    video: false,
-  },
+    video: false
+  }
 });

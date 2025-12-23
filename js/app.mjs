@@ -1,9 +1,7 @@
 import {
   generateImages,
   downloadAsPDF,
-  deleteAll,
-  moveLeft,
-  moveRight
+  deleteAll
 } from './generate-images.mjs';
 import { toggleDrawCanvas } from './utils/draw.mjs';
 import { InputController } from './controllers/InputController.mjs';
@@ -49,7 +47,10 @@ const GLOBAL_EVENTS = {
 for (const selector in GLOBAL_EVENTS) {
   const el = document.querySelector(selector);
   if (el) {
-    el.addEventListener(GLOBAL_EVENTS[selector].on, GLOBAL_EVENTS[selector].action);
+    el.addEventListener(
+      GLOBAL_EVENTS[selector].on,
+      GLOBAL_EVENTS[selector].action
+    );
   }
 }
 
@@ -70,8 +71,10 @@ document.fonts.ready.then(() => {
 /**
  * Set GitHub Contributors
  */
-fetch('https://api.github.com/repos/saurabhdaware/text-to-handwriting/contributors')
-  .then(response => {
+fetch(
+  'https://api.github.com/repos/saurabhdaware/text-to-handwriting/contributors'
+)
+  .then((response) => {
     if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
     return response.json();
   })
