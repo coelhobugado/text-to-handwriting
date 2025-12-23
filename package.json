@@ -1,0 +1,35 @@
+{
+  "name": "text-to-handwriting",
+  "version": "1.0.0",
+  "description": "A tool to convert text to a handwriting-like image.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "cypress run"
+  },
+  "keywords": [
+    "handwriting",
+    "text-converter"
+  ],
+  "author": "Saurabh Daware",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coelhobugado/text-to-handwriting.git"
+  },
+  "bugs": {
+    "url": "https://github.com/coelhobugado/text-to-handwriting/issues"
+  },
+  "homepage": "https://github.com/coelhobugado/text-to-handwriting#readme",
+  "devDependencies": {
+    "cypress": "^15.7.0",
+    "eslint": "^9.39.1",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "hypher": "^0.2.5",
+    "jspdf": "^3.0.4"
+  }
+}
